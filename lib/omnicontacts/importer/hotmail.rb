@@ -13,7 +13,7 @@ module OmniContacts
         super app, client_id, client_secret, options
         @auth_host = "oauth.live.com"
         @authorize_path = "/authorize"
-        @scope = options[:permissions] || "wl.signin, wl.basic, wl.birthday , wl.emails ,wl.contacts_birthday , wl.contacts_photos"
+        @scope = options[:permissions] || "wl.signin, wl.basic, wl.birthday , wl.emails ,wl.contacts_birthday , wl.contacts_photos, wl.contacts_emails"
         @auth_token_path = "/token"
         @contacts_host = "apis.live.net"
         @contacts_path = "/v5.0/me/contacts"
@@ -36,6 +36,7 @@ module OmniContacts
 
       def contacts_from_response response_as_json
         response = JSON.parse(response_as_json)
+	puts "All entries: #{response.inspect}"
         contacts = []
         response['data'].each do |entry|
 	  puts "Entry: #{entry.inspect}"
